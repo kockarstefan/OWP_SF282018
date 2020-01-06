@@ -11,31 +11,33 @@ import model.Films;
 
 public class FilmDAO {
 
-	public static Film get(int id) throws Exception {
+	public Film get(String naziv) throws Exception {
 		
+		ConnectionManager.open();
 		Connection conn = ConnectionManager.getConnection();
-
+		
+		Film film = new Film();
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			String query = "SELECT naziv,trajanje,distributer,zemlja_por, god_proiz FROM film WHERE id =?";
+			String query = "SELECT naziv,trajanje,distributer,zemlja_por, god_proiz FROM film WHERE naziv =?";
 
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, id);
+			pstmt.setString(1, naziv);
+			
 			System.out.println(pstmt);
 
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
 				int index = 1;
-				String naziv = rset.getString(index++);
-				String reziser = rset.getString(index++);
-				String trajanje = rset.getString(index++);
-				String distributer = rset.getString(index++);
-				String zemljaPorekla = rset.getString(index++);
+				film.setNaziv(rset.getString(index++));
+				film.setTrajanjeFilma(rset.getString(index++));
+				film.setDistributer(rset.getString(index++));
+				film.setZemljaPorekla(rset.getString(index++));;
 				int godinaProizvodnje = rset.getInt(index++);
-				
-				return new Film(id, naziv, reziser, trajanje, distributer, zemljaPorekla, godinaProizvodnje);
+				film.setGodinaProizvodnje(godinaProizvodnje);
 			}
 		} finally {
 			try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
@@ -43,8 +45,7 @@ public class FilmDAO {
 			try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
 		}
 		
-		
-		return null;
+		return film;
 	}
 	
 public ArrayList<Films> getAllFilms() throws Exception {

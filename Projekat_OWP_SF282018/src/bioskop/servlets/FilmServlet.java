@@ -39,6 +39,7 @@ public class FilmServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("Films.jsp");
 		
 		rd.forward(request, response);
@@ -47,8 +48,19 @@ public class FilmServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		response.setContentType("text/html");
+		
+		String naziv = request.getParameter("naziv");
+		
+		try {
+			request.setAttribute("film", new FilmDAO().get(naziv));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("Film.jsp");
+		rd.forward(request, response);
 	}
 
 }

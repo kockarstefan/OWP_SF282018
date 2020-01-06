@@ -12,17 +12,6 @@ public class Film {
 	
 
 	
-	public Film(int ID, String naziv, String reziser, String trajanjeFilma, String distributer, String zemljaPorekla,
-			int godinaProizvodnje) {
-		super();
-		this.ID = ID;
-		this.naziv = naziv;
-		this.reziser = reziser;
-		this.trajanjeFilma = trajanjeFilma;
-		this.distributer = distributer;
-		this.zemljaPorekla = zemljaPorekla;
-		this.godinaProizvodnje = godinaProizvodnje;
-	}
 	public int getID() {
 		return ID;
 	}

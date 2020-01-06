@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-
-<%@ page import="java.util.ArrayList"%>  
-<%@ page import="model.Films" %>  
+<%@ page import="model.Film" %>
     
-<% ArrayList<Films> films = (ArrayList) request.getAttribute("films"); %> 
+<%Film film = (Film) request.getAttribute("film"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,13 +11,9 @@
 </head>
 <body>
 <table border=1>
- <% for(int itFilm=0; itFilm < films.size(); itFilm++) { %>
- 	<tr>
-		<% Films film = (Films) films.get(itFilm); %>
+<tr>
 		<td>
-		<form action="FilmServlet" method="post">
-		<input type="submit" name="naziv" value="<%= film.getNaziv() %>"/> 
-		</form>
+		<%= film.getNaziv() %>
 		</td>
 		<td>
 		 <%= film.getTrajanjeFilma() %>
@@ -34,7 +28,7 @@
 		 <%= film.getGodinaProizvodnje() %>
 		</td>
 	</tr>
- <% } %>
+
 </table>
 </body>
 </html>
