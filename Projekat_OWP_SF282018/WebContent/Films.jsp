@@ -34,6 +34,12 @@
 		<td>
 		 <%= film.getGodinaProizvodnje() %>
 		</td>
+		<td>
+		<form action="EditFilm.jsp" method="post">
+		<input type="hidden" name="id" value="<%= films.indexOf(film)+1 %>"/>
+		<input type="submit" name="action" value="Izmeni"/>
+ 		</form>
+		</td>
 	</tr>
  <% } %>
 </table>
