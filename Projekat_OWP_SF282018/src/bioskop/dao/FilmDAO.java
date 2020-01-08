@@ -87,5 +87,37 @@ public ArrayList<Films> getAllFilms() throws Exception {
 	
 		return films;
 	}
+
+public static boolean addFilm(Film film) throws Exception{
+	ConnectionManager.open();
 	
+	Connection conn = ConnectionManager.getConnection();
+
+	PreparedStatement pstmt = null;
+	
+	
+	try {
+		String query = "INSERT INTO film VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+		pstmt = conn.prepareStatement(query);
+		
+		int index = 1;
+		pstmt.setInt(index++,film.getID());
+		pstmt.setString(index++, film.getReziser());
+		pstmt.setString(index++, film.getNaziv());
+		pstmt.setString(index++, film.getTrajanjeFilma());
+		pstmt.setString(index++, film.getDistributer());
+		pstmt.setString(index++, film.getZemljaPorekla());
+		pstmt.setInt(index++,film.getGodinaProizvodnje());
+		
+		return pstmt.executeUpdate() == 1;
+		
+	}finally {
+		try {pstmt.close();} catch (Exception ex1) {ex1.printStackTrace();}
+		try {conn.close();} catch (Exception ex1) {ex1.printStackTrace();}
+	}
 }
+}
+
+
+

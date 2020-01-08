@@ -18,6 +18,7 @@
 		<% Films film = (Films) films.get(itFilm); %>
 		<td>
 		<form action="FilmServlet" method="post">
+		<input type="hidden" name="action" value="showFilm">
 		<input type="submit" name="naziv" value="<%= film.getNaziv() %>"/> 
 		</form>
 		</td>
@@ -36,5 +37,9 @@
 	</tr>
  <% } %>
 </table>
+<br>
+<form action="AddFilm.html">
+	<input type="submit" value="Dodaj film"/>
+</form>
 </body>
 </html>

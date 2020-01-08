@@ -8,6 +8,25 @@ public class Films {
 	protected String zemljaPorekla;
 	protected int godinaProizvodnje;
 	
+	
+	
+	public Films(String naziv, String trajanjeFilma, String distributer, String zemljaPorekla, int godinaProizvodnje) {
+		super();
+		this.naziv = naziv;
+		this.trajanjeFilma = trajanjeFilma;
+		this.distributer = distributer;
+		this.zemljaPorekla = zemljaPorekla;
+		this.godinaProizvodnje = godinaProizvodnje;
+	}
+	
+	public Films() {
+		this.naziv = "";
+		this.trajanjeFilma = "";
+		this.distributer = "";
+		this.zemljaPorekla = "";
+		this.godinaProizvodnje = 0;
+		
+	}
 	public String getNaziv() {
 		return naziv;
 	}

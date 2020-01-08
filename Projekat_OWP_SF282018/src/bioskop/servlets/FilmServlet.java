@@ -51,16 +51,57 @@ public class FilmServlet extends HttpServlet {
 		
 		response.setContentType("text/html");
 		
-		String naziv = request.getParameter("naziv");
-		
-		try {
-			request.setAttribute("film", new FilmDAO().get(naziv));
-		} catch (Exception e) {
-			e.printStackTrace();
+		ServletContext context = getServletContext();
+		ArrayList<Films> films = (ArrayList) context.getAttribute("films");
+ 		
+		String action = request.getParameter("action");
+		switch(action) {
+		case "add" : {
+			
+			int filmsCount = films.size();
+			
+			int idADD = filmsCount + 1;
+			String reziserADD = (String) request.getParameter("reziser");
+			String nazivADD = (String) request.getParameter("naziv");
+			String trajanjeADD = (String) request.getParameter("trajanje");
+			String distributerADD = (String) request.getParameter("distributer");
+			String zemljaPoreklaADD = (String) request.getParameter("zemljaPorekla");
+			int godinaProizvodnjeADD = Integer.parseInt(request.getParameter("godinaProizvodnje"));
+			
+			Film filmADD = new Film(idADD, reziserADD, nazivADD, trajanjeADD, distributerADD, zemljaPoreklaADD, godinaProizvodnjeADD);
+			
+			try {
+				FilmDAO.addFilm(filmADD);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			Films filmsADD = new Films(nazivADD, trajanjeADD, distributerADD, zemljaPoreklaADD, godinaProizvodnjeADD);
+			
+			films.add(filmsADD);
+				
+			request.setAttribute("films", films);
+			RequestDispatcher rd = request.getRequestDispatcher("Films.jsp");
+			rd.forward(request, response);
+			break;
+		}
+		case "showFilm": {
+			
+			String naziv = request.getParameter("naziv");
+			
+			try {
+				request.setAttribute("film", new FilmDAO().get(naziv));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Film.jsp");
+			rd.forward(request, response);
+			break;
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("Film.jsp");
-		rd.forward(request, response);
+		
 	}
 
+	}
 }

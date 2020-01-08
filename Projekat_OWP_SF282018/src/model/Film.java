@@ -12,6 +12,27 @@ public class Film {
 	
 
 	
+	public Film(int ID, String naziv, String reziser, String trajanjeFilma, String distributer, String zemljaPorekla,
+			int godinaProizvodnje) {
+		super();
+		this.ID = ID;
+		this.naziv = naziv;
+		this.reziser = reziser;
+		this.trajanjeFilma = trajanjeFilma;
+		this.distributer = distributer;
+		this.zemljaPorekla = zemljaPorekla;
+		this.godinaProizvodnje = godinaProizvodnje;
+	}
+	
+	public Film() {
+		this.ID = 0;
+		this.naziv = "";
+		this.reziser = "";
+		this.trajanjeFilma = "";
+		this.distributer = "";
+		this.zemljaPorekla = "";
+		this.godinaProizvodnje = 0;
+	}
 	public int getID() {
 		return ID;
 	}
