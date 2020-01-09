@@ -131,6 +131,18 @@ public class FilmServlet extends HttpServlet {
 			break;
 		}
 		
+		case "Ukloni": {
+			int id = Integer.parseInt(request.getParameter("id"));
+			films.remove(id);
+			
+			request.setAttribute("films", films);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("Films.jsp");
+			rd.forward(request, response);
+			
+			break;
+		}
+		
 	}
 
 	}

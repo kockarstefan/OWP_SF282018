@@ -40,6 +40,12 @@
 		<input type="submit" name="action" value="Izmeni"/>
  		</form>
 		</td>
+		<td>
+		<form action="FilmServlet" method="post">
+		<input type="hidden" name="id" value="<%= films.indexOf(film) %>"/>
+		<input type="submit" name="action" value="Ukloni"/>
+		</form>
+		</td>
 	</tr>
  <% } %>
 </table>
