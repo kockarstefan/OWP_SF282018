@@ -3,6 +3,7 @@ package bioskop.servlets;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -10,8 +11,10 @@ import javax.servlet.ServletContextListener;
 
 import bioskop.dao.ConnectionManager;
 import bioskop.dao.FilmDAO;
+import bioskop.dao.UserDAO;
 import model.Film;
 import model.Films;
+import model.User;
 
 
 public class InitListener implements ServletContextListener {
@@ -26,6 +29,12 @@ public class InitListener implements ServletContextListener {
     	
     	ServletContext context = event.getServletContext();
     	
+    	try {
+			Map<String, User> users = new UserDAO().getAllUsers();
+			context.setAttribute("users", users);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		try {
 			ArrayList<Films> films = new FilmDAO().getAllFilms();
 			context.setAttribute("films", films);

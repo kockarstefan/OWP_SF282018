@@ -1,12 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Index</title>
 </head>
 <body>
-<a href="FilmServlet">Prikazi filmove</a>
+	<form action="LoginServlet" method="post">
+	Korisnicko ime:<input type="text" name="korisnickoIme"/><br>
+	Lozinka:<input type="password" name="lozinka"/><br>
+	<input type="submit" value="Login"/> 
+	</form>
+	<br>
+	<a href="Register.html">Registracija</a>
 </body>
 </html>
