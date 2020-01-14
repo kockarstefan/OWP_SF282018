@@ -26,7 +26,6 @@ public class FilmDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, naziv);
 			
-			System.out.println(pstmt);
 
 			rset = pstmt.executeQuery();
 
@@ -63,7 +62,7 @@ public class FilmDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, id);
 			
-			System.out.println(pstmt);
+			
 
 			rset = pstmt.executeQuery();
 

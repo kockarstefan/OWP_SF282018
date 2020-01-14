@@ -53,5 +53,8 @@
 <form action="AddFilm.html">
 	<input type="submit" value="Dodaj film"/>
 </form>
+<p>
+<a href="UserServlet">Prikazi sve korisnike</a>
+</p>
 </body>
 </html>

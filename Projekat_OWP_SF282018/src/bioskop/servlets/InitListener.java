@@ -30,6 +30,13 @@ public class InitListener implements ServletContextListener {
     	ServletContext context = event.getServletContext();
     	
     	try {
+			ArrayList<User> usersList = new UserDAO().getUsersList();
+			context.setAttribute("usersList", usersList);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+    	
+    	try {
 			Map<String, User> users = new UserDAO().getAllUsers();
 			context.setAttribute("users", users);
 		} catch (Exception e1) {
