@@ -1,86 +1,72 @@
 package model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class User {
 
-	public enum Role{Korisnik,Administrator}
+	public enum Role{USER,ADMIN}
 	
-	protected int id;
-	protected String korisnickoIme;
-	protected String lozinka;
-	protected String datumRegistacije;
-	protected Role role;
+	private String username;
+	private String password;
+	private LocalDate registrationDate;
+	private Role role;
+	private boolean active;
 	
-	public User(int id, String korisnickoIme, String lozinka, String datumRegistacije, Role role) {
+	public User() {}
+
+	public User(String username, String password, LocalDate registrationDate, Role role, boolean active) {
 		super();
-		this.id = id;
-		this.korisnickoIme = korisnickoIme;
-		this.lozinka = lozinka;
-		this.datumRegistacije = datumRegistacije;
+		this.username = username;
+		this.password = password;
+		this.registrationDate = registrationDate;
 		this.role = role;
+		this.active = active;
 	}
 
-	
-
-	public User() {
-		super();
+	public String getUsername() {
+		return username;
 	}
 
-
-
-	public int getId() {
-		return id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-
-	public void setId(int id) {
-		this.id = id;
+	public String getPassword() {
+		return password;
 	}
 
-
-	public String getKorisnickoIme() {
-		return korisnickoIme;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-
-	public void setKorisnickoIme(String korisnickoIme) {
-		this.korisnickoIme = korisnickoIme;
+	public LocalDate getRegistrationDate() {
+		return registrationDate;
 	}
 
-
-	public String getLozinka() {
-		return lozinka;
+	public void setRegistrationDate(LocalDate registrationDate) {
+		this.registrationDate = registrationDate;
 	}
-
-
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
-	}
-
-
-	public String getDatumRegistacije() {
-		return datumRegistacije;
-	}
-
-
-
-	public void setDatumRegistacije(String datumRegistacije) {
-		this.datumRegistacije = datumRegistacije;
-	}
-
-
 
 	public Role getRole() {
 		return role;
 	}
 
-
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
 
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	
+	
+	
 	
 	
 	

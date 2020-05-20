@@ -3,17 +3,20 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v6.0">
+	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v6.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_231">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/meli/Downloads/javax.servlet.jsp.jstl-1.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/meli/Downloads/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/commons-dbcp2-2.5.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/commons-logging-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/commons-pool2-2.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/jackson-annotations-2.11.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/jackson-core-2.11.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/jackson-databind-2.11.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/javax.servlet.jsp.jstl-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/javax.servlet.jsp.jstl-api-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/Users/Stef/git/OWP_SF282018/Projekat_OWP_SF282018/WebContent/WEB-INF/lib/sqlite-jdbc-3.27.2.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

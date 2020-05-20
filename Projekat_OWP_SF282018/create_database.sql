@@ -1,62 +1,80 @@
-CREATE TABLE IF NOT EXISTS korisnik (
-ID INTEGER NOT NULL PRIMARY KEY, 
-kor_Ime VARCHAR(30) UNIQUE,
-lozinka VARCHAR(30) UNIQUE,
-datum_Reg DATETIME NOT NULL,
-uloga VARCHAR(20) NOT NULL);
+drop table if exists Movies;
 
-
-CREATE TABLE IF NOT EXISTS karta (
-ID INTEGER  PRIMARY KEY,
-projekcijaID VARCHAR(30),
-sediste INTEGER NOT NULL,
-datum_Prod DATETIME NOT NULL,
-korID INTEGER NOT NULL,
-FOREIGN KEY (korID)
-    references korisnik (ID),
-FOREIGN KEY(projekcijaID)
-    references projekcija (ID) 
+create table Movies(
+    ID integer primary key,
+    Title varchar(100) not null,
+    Director varchar(100) not null,
+    Genre varchar(30) not null,
+    Duration int check(Duration > 0) not null,
+    Distributor varchar(100) not null,
+    Country varchar(50) not null,
+    ReleaseDate int check (ReleaseDate > 0) not null,
+    Active integer not null
 );
 
+drop table if exists Users;
 
-CREATE TABLE IF NOT EXISTS projekcija (
-ID INTEGER PRIMARY KEY,
-filmID INTEGER NOT NULL,
-tip_pro VARCHAR(5) NOT NULL,
-sala INTEGER NOT NULL,
-dat_prikaz DATETIME NOT NULL,
-cena_karte MONEY NOT NULL CHECK(cena_karte > 0),
-adminID INTEGER NOT NULL,
-FOREIGN KEY (filmID)
-    references film(ID),
-FOREIGN KEY (adminID)
-    references korisnik(ID)
+create table Users(
+    Username varchar(20) primary key,
+    Password varchar(20) not null,
+    RegistrationDate integer not null,
+    Role varchar(15) not null,
+    Active integer not null
 );
 
+drop table if exists ProjectionTypes;
 
-CREATE TABLE IF NOT EXISTS film (
-ID INTEGER PRIMARY KEY,
-naziv VARCHAR(40) NOT NULL,
-reziser VARCHAR(30) NOT NULL,
-trajanje VARCHAR(15) NOT NULL,
-distributer VARCHAR(40) NOT NULL,
-zemlja_por VARCHAR(30) NOT NULL,
-god_proiz INTEGER(30) NOT NULL
+create table ProjectionTypes (
+    ID integer primary key,
+    Type varchar(5) not null
 );
 
+drop table if exists Halls;
 
-create table student (
-    br_ind      CHAR(6)	Primary Key,
-    prezime     char(20)    not null,
-    ime         char(20)    not null,
-    godstud     char(3)     not null);
-    
-    
-    
-    
-    
-INSERT INTO korisnik VALUES (1,'korisnickoIme1', 'lozinka1', datetime('now'), 'Administrator');
-INSERT INTO korisnik VALUES (2,'korisnickoIme2' , 'lozinka2' , datetime('now'), 'Korisnik');
+create table Halls (
+    ID integer primary key,
+    Name varchar(50) not null,
+    NumOfProjections int check(NumOfProjections > 0 and NumOfProjections < 4) not null
+);
 
-INSERT INTO film VALUES (1, 'Gospodar prstenova', 'Piter Jackson', '3h 50min', 'New Line Cinema', 'Ujedinjeno Kraljevstvo', 2001);
-INSERT INTO film VALUES (2, '3 metra iznad neba', 'Fernando Gonzales Morina', '2h', 'Warner Bros', 'Spanija', 2010);
+drop table if exists Seats;
+
+create table Seats (
+    SeatNumber integer not null,
+    Hall int not null,
+    foreign key(Hall) references Halls(ID),
+    primary key (Number, Hall)
+);
+
+drop table if Exists Projections;
+
+create table Projections (
+    ID integer primary key,
+    Movie int not null,
+    ProjectionType int not null,
+    Hall int not null,
+    Date integer not null,
+    Price real check ( Price > 0 ) not null,
+    Admin varchar(30) not null,
+    Active integer not null,
+    foreign key(Movie) references Movies(ID),
+    foreign key(ProjectionType) references ProjectionTypes(ID),
+    foreign key(Hall) references Halls(ID),
+    foreign key(Admin) references Users(Username)
+);
+
+drop table if exists Tickets;
+
+create table Tickets (
+    ID integer primary key,
+    Projection int not null,
+    SeatNumber int not null,
+    Hall int not null,
+    DateSold integer not null,
+    User varchar(30) not null,
+    Active integer not null,
+    foreign key(Projection) references Projections(ID),
+    foreign key(SeatNumber) references Seats(Number),
+    foreign key(Hall) references Seats(Hall),
+    foreign key(User) references Users(Username)
+);
