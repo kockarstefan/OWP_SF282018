@@ -12,16 +12,18 @@ public class User {
 	private LocalDate registrationDate;
 	private Role role;
 	private boolean active;
+	private boolean loggedIn;
 	
 	public User() {}
 
-	public User(String username, String password, LocalDate registrationDate, Role role, boolean active) {
+	public User(String username, String password, LocalDate registrationDate, Role role, boolean active, boolean loggedIn) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.registrationDate = registrationDate;
 		this.role = role;
 		this.active = active;
+		this.loggedIn = loggedIn;
 	}
 
 	public String getUsername() {

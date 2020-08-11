@@ -4,4 +4,54 @@
   <welcome-file-list>
     <welcome-file>Index.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>bioskop.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SuccessServlet</display-name>
+    <servlet-name>SuccessServlet</servlet-name>
+    <servlet-class>bioskop.servlets.SuccessServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SuccessServlet</servlet-name>
+    <url-pattern>/SuccessServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserServlet</display-name>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>bioskop.servlets.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/UserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoggedInUserServlet</display-name>
+    <servlet-name>LoggedInUserServlet</servlet-name>
+    <servlet-class>bioskop.servlets.LoggedInUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoggedInUserServlet</servlet-name>
+    <url-pattern>/LoggedInUserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FailureServlet</display-name>
+    <servlet-name>FailureServlet</servlet-name>
+    <servlet-class>bioskop.servlets.FailureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FailureServlet</servlet-name>
+    <url-pattern>/FailureServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

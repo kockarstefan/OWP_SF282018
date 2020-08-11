@@ -19,7 +19,8 @@ create table Users(
     Password varchar(20) not null,
     RegistrationDate integer not null,
     Role varchar(15) not null,
-    Active integer not null
+    Active integer not null,
+    LoggedIn integer not null
 );
 
 drop table if exists ProjectionTypes;
