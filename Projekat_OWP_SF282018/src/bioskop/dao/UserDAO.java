@@ -92,4 +92,26 @@ public class UserDAO {
 			try { connection.close(); } catch (Exception e1) { e1.printStackTrace(); }
 		}
 	}
+	
+	public static boolean register (User user) throws Exception {
+		ConnectionManager.open();
+		Connection connection = ConnectionManager.getConnection();
+		
+		PreparedStatement pstmt = null;
+		try {
+			String query = "insert into Users values (?, ?, ?, ?, 1, 0) ";
+			pstmt = connection.prepareStatement(query);
+			int index = 1;
+			pstmt.setString(index++, user.getUsername());
+			pstmt.setString(index++, user.getPassword());
+			pstmt.setInt(index++, DateTimeUtil.LocalDateToUnixTimeStamp(user.getRegistrationDate()));
+			pstmt.setString(index++, user.getRole().toString());
+			
+			return pstmt.executeUpdate() == 1;
+			
+		} finally {
+			try { pstmt.close(); } catch (Exception e1) { e1.printStackTrace(); }
+			try { connection.close(); } catch (Exception e1) { e1.printStackTrace(); }
+		}
+	}
 }

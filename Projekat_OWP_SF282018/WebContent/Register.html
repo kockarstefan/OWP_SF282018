@@ -3,15 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Bioskop</title>
-<link rel="stylesheet" href="index.css" type="text/css">
+<link rel="stylesheet" href="register.css" type="text/css">
 </head>
 <body>
-	<div class="login" id="app">
-		<form class="login-form" action="LoginServlet" method="post">
+	<div class="register" id="app">
+		<form class="register-form" action="RegisterServlet" method="post">
 		<input v-model="username" type="text" id="userName" placeholder="username"/><br>
 		<input v-model="password" type="password" id="Password" placeholder="password"/><br>
-		<button v-on:click.prevent="loginSubmit" type="submit" id="loginSubmit"> Login </button>
-		<p class="message">Not registered? <a href="Register.html">Register now</a></p>
+		<input v-model="repeatedPassword" type="password" id="repeatedPassword" placeholder="repeat password"/><br>
+		<button v-on:click.prevent="registerSubmit" type="submit" id="RegisterSubmit"> Register </button>
+		<p class="message">To go back, click <a href="Login.html">here.</a></p>
 		</form>
 		<div v-if="showMessage" role="alert" id="messageDiv">
              <p style="color: red;" id="messageParagraph">{{ message }}</p>
@@ -20,5 +21,5 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
-<script src="js/Login.js"></script>
+<script src="js/Register.js"></script>
 </html>
