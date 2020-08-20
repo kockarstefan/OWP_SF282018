@@ -40,11 +40,7 @@ public class LoggedInUserServlet extends HttpServlet {
 				return;
 			}
 			
-			//if (!user.isLoggedIn()) {
-			//	request.getSession().invalidate();
-			//	request.getRequestDispatcher("./UnauthenticatedServlet").forward(request, response);
-			//	return;
-			//}
+			
 			
 			Map<String, Object> data = new LinkedHashMap<String, Object>();
 			Map<String, Object> loggedInUser = new LinkedHashMap<String, Object>();
