@@ -12,11 +12,11 @@ import org.sqlite.JDBC;
 
 public class ConnectionManager extends JDBC {
 	
-	private static final String DATABASE_NAME = "database.db";
+	private static final String DATABASE_NAME = "projectDatabase.db";
 
 	private static final String FILE_SEPARATOR = System.getProperty("file.separator"); 
 	
-	private static final String WINDOWS_PATH = "D:" + FILE_SEPARATOR + "Users" + FILE_SEPARATOR + "Stef" + FILE_SEPARATOR + DATABASE_NAME;
+	private static final String WINDOWS_PATH = "C:" + FILE_SEPARATOR + "Users" + FILE_SEPARATOR + "Stef" + FILE_SEPARATOR + "Desktop" + FILE_SEPARATOR + DATABASE_NAME;
 
 	private static final String PATH = WINDOWS_PATH;	
 

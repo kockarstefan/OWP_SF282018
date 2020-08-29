@@ -8,3 +8,9 @@
 .navbar-nav .nav-link a {
 	color: white;
 }
+
+th {
+	background-color: transparent;
+	text-align: center;
+	color: white;
+}

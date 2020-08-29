@@ -2,89 +2,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Bioskop</title>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <link rel="stylesheet" type="text/css" href="welcome.css">
-
 </head>
-<body>
-<div id="app" class="main-page">
-	<div class="row">
-		<div class="col d-none d-lg-block">
-			<nav class="navbar navbar-expand-lg navbar-fixed-top">
-				<a class="navbar-brand" href="Welcome.html"><img src="imgs/cinema-logo.jpg"></a>
-					<ul class="navbar-nav ml-auto mr-auto">
-                         <li class="nav-item active mr-5">
-                                <a class="nav-link" href="Welcome.html">Home</a>
-                         </li>
-                         <li class="nav-item active mr-5">
-                                <a class="nav-link" href="#">Movies</a>
-                         </li>
-                         <li v-if="loggedInUser.userRole == 'ADMIN'" class="nav-item active mr-5">
-                                <a class="nav-link" href="#">Users</a>
-                         </li>
-                         <li v-if="loggedInUser.userRole == 'ADMIN'" class="nav-item active mr-5">
-                            	<a class="nav-link" href="#">Reports</a>
-                      	 </li>
-                         <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle font-weight-bold text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    My account
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a v-if="loggedInUser.userRole == ''" class="dropdown-item text-white" href="Login.html">Sign in</a>
-                                    <a v-if="loggedInUser.userRole == ''" class="dropdown-item text-white" href="Registration.html">Register</a>
-                                    <a v-if="loggedInUser.userRole != ''" class="dropdown-item text-white" :href="#">My account</a>
-                                    <a v-if="loggedInUser.userRole != ''" class="dropdown-item text-white" href="#">Logout</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
+<body style="	background-image:url(imgs/cinema_cover.jpg);
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-size: cover;">
+<div id="app">
+ <!-- NAVIGATION -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapse_target">
+		<a class="navbar-brand" href="Welcome.html"><img src="imgs/cinema-logo.jpg" class="img-responsive"></a>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a class="nav-link font-weight-bold text-white" href="Welcome.html">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link font-weight-bold text-white" href="#">Users</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown" data-target="#dropdown_target" href="#" style="color: white;">
+				Account</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown_target">
+					<a class="dropdown-item" href="Index.html">Sign in</a>
+					<a class="dropdown-item" href="Register.html">Register</a>
+					<a class="dropdown-item" href="#">My Account</a>
+					<a class="dropdown-item" href="#">Logout</a>
 				</div>
-				<div class="col d-lg-none">
-					<nav class="navbar navbar-expand-lg">
-						<a class="navbar-brand" href="Welcome.html"><img src="imgs/cinema-logo.jpg"></a>
-					
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbar-collapse-main" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-						<span class="navbar-toggler-icon"></span>
-						<span class="navbar-toggler-icon"></span>
-						</button>
-					
-					
-					<div class="collapse navbar-collapse" id="navbar-collapse-main">
-						<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item active mr-5">
-                                <a class="nav-link" href="Welcome.html">Home</a>
-                            </li>
-                            <li class="nav-item active mr-5">
-                                <a class="nav-link" href="#">Movies</a>
-                            </li>
-                            <li v-if="loggedInUser.userRole == 'ADMIN'" class="nav-item active mr-5">
-                                <a class="nav-link" href="#">Users</a>
-                            </li>
-                            <li v-if="loggedInUser.userRole == 'ADMIN'" class="nav-item active mr-5">
-                            	<a class="nav-link" href="#">Reports</a>
-                        	</li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle font-weight-bold text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    My account
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a v-if="loggedInUser.userRole == ''" class="dropdown-item text-white" href="Login.html">Sign in</a>
-                                    <a v-if="loggedInUser.userRole == ''" class="dropdown-item text-white" href="Registration.html">Register</a>
-                                    <a v-if="loggedInUser.userRole != ''" class="dropdown-item text-white" :href="#">My account</a>
-                                    <a v-if="loggedInUser.userRole != ''" class="dropdown-item text-white" href="#">Logout</a>
-                                </div>
-                            </li>
-                        </ul>
-					</div>
-				</nav>
-			</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link font-weight-bold text-white" href="#">Reports</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link font-weight-bold text-white" href="Movies.html">Movies</a>
+			</li>
+		</ul>
 		</div>
+	</nav>
+<!-- END OF NAVIGATION -->
+
+
 </div>
 </body>
 </html>

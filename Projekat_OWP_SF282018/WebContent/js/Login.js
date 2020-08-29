@@ -14,6 +14,8 @@ var app = new Vue({
 	data: {
 		username: '',
 		password: '',
+		message: '',
+		showMessage = false,
 	},
 	methods: {
 		loginSubmit: function(event) {

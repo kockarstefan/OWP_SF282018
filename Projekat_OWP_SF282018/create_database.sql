@@ -12,6 +12,10 @@ create table Movies(
     Active integer not null
 );
 
+insert into Movies (Title, Director, Genre, Duration, Distributor, Country, ReleaseDate, Active) values ('Vertigo','Alfred Hitchcock','Psychological thriller','128','Paramount Pictures','US',1958,1)
+insert into Movies (Title, Director, Genre, Duration, Distributor, Country, ReleaseDate, Active) values ('Suicide Squad','David Ayer','Superhero film','123','Warner Bros Pictures','US',2016,1)
+insert into Movies (Title, Director, Genre, Duration, Distributor, Country, ReleaseDate, Active) values ('Titanic','James Cameron','Romance','195','Paramount Pictures','US',1958,1)
+
 drop table if exists Users;
 
 create table Users(
@@ -22,6 +26,10 @@ create table Users(
     Active integer not null,
     LoggedIn integer not null
 );
+
+insert into Users values('admin', 'admin', date('now'), 'ADMIN', 1, 0);
+insert into Users values('stefan', 'stefans', date('now'), 'USER', 1, 0);
+insert into Users values('petar', 'petarp', date('now'), 'USER', 1, 0);
 
 drop table if exists ProjectionTypes;
 
@@ -41,10 +49,9 @@ create table Halls (
 drop table if exists Seats;
 
 create table Seats (
-    SeatNumber integer not null,
+    SeatNumber integer PRIMARY KEY,
     Hall int not null,
     foreign key(Hall) references Halls(ID),
-    primary key (Number, Hall)
 );
 
 drop table if Exists Projections;
@@ -54,7 +61,7 @@ create table Projections (
     Movie int not null,
     ProjectionType int not null,
     Hall int not null,
-    Date integer not null,
+    Date date not null,
     Price real check ( Price > 0 ) not null,
     Admin varchar(30) not null,
     Active integer not null,
