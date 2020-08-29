@@ -1,7 +1,9 @@
 package bioskop.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bioskop.dao.MovieDAO;
 import bioskop.dao.UserDAO;
+import model.Movie;
 import model.User;
 
 
@@ -25,42 +29,17 @@ public class UserServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-//			String loggedInUsername = (String) request.getSession().getAttribute("loggedInUsername");
-//			if (loggedInUsername == null) {
-//				request.getRequestDispatcher("./UnauthorizedServlet").forward(request, response);
-//				return;
-//			}
-//			User loggedInUser = UserDAO.getUserByUsername(loggedInUsername);
-//			if (loggedInUser == null) {
-//				request.getRequestDispatcher("./LogoutServlet").forward(request, response);
-//				return;
-//			}
-//			
-			//if (!loggedInUser.isLoggedIn()) {
-				//request.getRequestDispatcher("./LogoutServlet").forward(request, response);
-				//return;
-			//}
-			
-			//if (loggedInUser.getUserRole() != UserRole.ADMIN && !loggedInUser.getUsername().equals(request.getParameter("username"))) {
-			//	request.getRequestDispatcher("./UnauthorizedServlet").forward(request, response);
-			//	return;
-			//}
-			
-			String username = request.getParameter("userName");
-			User user = UserDAO.getUserByUsername(username);
-			
+			List<User> users = new ArrayList<>();
+			users = UserDAO.getAllUsers();
 			Map<String, Object> data = new LinkedHashMap<String, Object>();
-			data.put("user", user);
+			data.put("users", users);
 			
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
-			
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
-			request.getRequestDispatcher("./FailureServlet").forward(request, response);
 		}
 	}
-
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
