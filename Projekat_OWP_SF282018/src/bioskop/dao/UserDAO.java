@@ -33,8 +33,7 @@ public static List<User> getAllUsers() throws Exception {
 				String username = rset.getString(index++);
 				String password = rset.getString(index++);
 				
-				int timeStamp = rset.getInt(index++);
-				LocalDate registrationDate = DateTimeUtil.UnixTimeStampToLocalDate(timeStamp);
+				LocalDate registrationDate = DateTimeUtil.UnixTimeStampToLocalDate(rset.getInt(index++));
 				User.Role userRole = User.Role.valueOf(rset.getString(index++));
 				boolean active = rset.getInt(index++) == 1;
 				boolean loggedIn = rset.getInt(index++) == 1;
@@ -60,6 +59,7 @@ public static List<User> getAllUsers() throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
+		
 		try {
 			
 			String query = "select * from Users where Username = ?";
@@ -81,7 +81,8 @@ public static List<User> getAllUsers() throws Exception {
 				boolean active = rset.getInt(index++) == 1;
 				boolean loggedIn = rset.getInt(index++) == 1;
 				
-				return new User(username, "", registrationDate, userRole, active, loggedIn);
+				return new User(username, password, registrationDate, userRole, active, loggedIn);
+		
 			}
 		} finally {
 			if(pstmt != null) try { pstmt.close(); } catch (Exception e1) { e1.printStackTrace(); }
@@ -157,5 +158,46 @@ public static List<User> getAllUsers() throws Exception {
 			try { pstmt.close(); } catch (Exception e1) { e1.printStackTrace(); }
 			try { connection.close(); } catch (Exception e1) { e1.printStackTrace(); }
 		}
-	}	
+	}
+	
+	public static boolean updateUser (User user) throws Exception {
+		ConnectionManager.open();
+		Connection connection = ConnectionManager.getConnection();
+		
+		PreparedStatement pstmt = null;
+		try {
+			String query = "update Users set Password = ?, RegistrationDate = ?, "
+					+ "Role = ? where Username = ?";
+			pstmt = connection.prepareStatement(query);
+			int index = 1;
+			pstmt.setString(index++, user.getPassword());
+			pstmt.setInt(index++, DateTimeUtil.LocalDateToUnixTimeStamp(user.getRegistrationDate()));
+			pstmt.setString(index++, user.getRole().toString());
+			pstmt.setString(index++, user.getUsername());
+			
+			return pstmt.executeUpdate() == 1;
+			
+		} finally {
+			try { pstmt.close(); } catch (Exception e1) { e1.printStackTrace(); }
+			try { connection.close(); } catch (Exception e1) { e1.printStackTrace(); }
+		}
+	}
+	
+	public static boolean deleteUser (User user) throws Exception {
+		ConnectionManager.open();
+		Connection connection = ConnectionManager.getConnection();
+		
+		PreparedStatement pstmt = null;
+		try {
+			String query = "update Users set Active = 0 where Username = ?";
+			pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, user.getUsername());
+			
+			return pstmt.executeUpdate() == 1;
+			
+		} finally {
+			try { pstmt.close(); } catch (Exception e1) { e1.printStackTrace(); }
+			try { connection.close(); } catch (Exception e1) { e1.printStackTrace(); }
+		}
+	}
 }

@@ -40,10 +40,56 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		String action = request.getParameter("action");
+		
+		switch (action) {
+			case "update": {
+				try {
+				User user = UserDAO.getUserByUsername(request.getParameter("username"));
+				String realPassword = UserDAO.getPasswordByUsername(request.getParameter("username"));
+				String newPassword = request.getParameter("newPassword");
+				if (!realPassword.equals(newPassword))
+					user.setPassword(newPassword);
+				else
+					user.setPassword(realPassword);
+				
+				User.Role newUserRole = User.Role.valueOf(request.getParameter("newUserRole"));
+				if (user.getRole() != newUserRole)
+					user.setRole(newUserRole);
+				
+				if (user != null) {
+					if (!UserDAO.updateUser(user))
+						throw new Exception("Greska prilikom izmene korisnika u bazi");
+				}
+				request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+				break;
+			}catch(Exception e) {
+				e.printStackTrace();
+				request.getRequestDispatcher("./FailureServlet").forward(request, response);
+			}
+			}
+			case "delete": {
+				User user;
+				try {
+					user = UserDAO.getUserByUsername(request.getParameter("username"));
+				
+				
+				if (user != null) {
+					if (!UserDAO.deleteUser(user))
+						throw new Exception("Greska prilikom brisanja korisnika iz baze");
+					
+				}
+				request.getRequestDispatcher("./SuccessServlet").forward(request, response);
+				break;
+				}catch(Exception e) {
+					e.printStackTrace();
+					request.getRequestDispatcher("./FailureServlet").forward(request, response);
+				}
+				
+			}
+	}
+}
 }

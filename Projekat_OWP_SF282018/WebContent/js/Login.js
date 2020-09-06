@@ -15,10 +15,11 @@ var app = new Vue({
 		username: '',
 		password: '',
 		message: '',
-		showMessage = false,
+		showMessage: false
 	},
 	methods: {
 		loginSubmit: function(event) {
+        	
 			if(!this.validation()) {
                 this.showMessage = true;
                 this.username = '';

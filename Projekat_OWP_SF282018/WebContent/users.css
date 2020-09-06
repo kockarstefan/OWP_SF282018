@@ -1,0 +1,25 @@
+.navbar-brand .img-responsive {
+	height: auto;
+	width: auto;
+	max-height: 72px;
+	max-width: 250px;
+}
+
+.navbar-nav .nav-link a {
+	color: white;
+}
+
+th {
+	background-color: transparent;
+	text-align: center;
+	color: white;
+}
+
+#overlay {
+	position: fixed;
+	top: 10vh;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.6)
+}

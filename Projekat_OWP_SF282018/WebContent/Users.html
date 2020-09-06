@@ -6,8 +6,10 @@
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<link rel="stylesheet" type="text/css" href="movies.css">
+	<link rel="stylesheet" type="text/css" href="users.css">
     
     <title>Users</title>
   </head>
@@ -60,6 +62,8 @@
 					<th scope="col">Registration Date</th>
 					<th scope="col">Role</th>
 					<th scope="col">Active</th>
+					<th scope="col">Edit</th>
+					<th scope="col">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -68,15 +72,75 @@
 					<th>{{ user.registrationDate.dayOfMonth}}-{{user.registrationDate.month}}-{{user.registrationDate.year}}</th>
 					<th>{{ user.role }}</th>
 					<th>{{ user.active }}</th>
+					<th><a href="#" class="text-success" @click="showEditModal=true; selectedUser(user);"><i class="fas fa-edit"></i></a></th>
+					<th><a href="#" class="text-danger" @click="showDeleteModal=true; selectedUser(user);"><i class="fas fa-trash-alt"></i></a></th>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	</div>
+	
+	<div id="overlay" v-if="showEditModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"> Edit User</h5>
+					<button type="button" class="close" @click="showEditModal=false">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body p-4">
+					<form>
+						<div class="form-group">
+							Username:<input disabled v-model="currentUser.username" type="text" name="username" class="form-control form-control-lg"> 
+						</div>
+						<div class="form-group">
+							New password<input type="password" name="newpassword" class="form-control form-control-lg" v-model="newPassword"> 
+						</div>
+						<div class="form-group">
+							Repeat new password:<input type="password" name="repeatedPassword" class="form-control form-control-lg" v-model="repeatedPassword"> 
+						</div>
+						<div class="form-group">
+						New user role:
+							<select v-model="selectedUserRole" id="userRoleInput" class="form-control form-control-lg">
+                                  <option v-for="userRoleOption in userRoleOptions" v-bind:value="userRoleOption">{{ userRoleOption }}</option>
+                            </select>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-info btn-block btn-lg" type="submit" @click="updateUser">Update user</button>
+						</div>
+					</form>
+				</div> 
+			</div>
+		</div>
+	</div>
+	
+	<div id="overlay" v-if="showDeleteModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title"> Delete User</h5>
+					<button type="button" class="close" @click="showDeleteModal=false">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body p-4">
+					<h4 class="text-danger">Are you sure you want to delete this user?</h4>
+					<h3>You are deleting '{{currentUser.username}}'.</h3>
+					<hr>
+					<button class="btn btn-danger btn-lg" @click="deleteUser">Yes</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-success btn-lg" @click="showDeleteModal=false">No</button>
+				</div> 
+			</div>
+		</div>
+	</div>
+	
 	</div>
 	</body>
 	<script src="js/jquery-3.4.1.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 	<script src="js/Users.js"></script>
 </html>

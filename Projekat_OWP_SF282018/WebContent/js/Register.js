@@ -26,6 +26,8 @@ $(document).ready(function() {
 	                        'password': this.password
 	                }
 	                
+	                console.log(this.username);
+	                
 	                $.post('RegisterServlet', params, function(data) {
 	                    
 	                    if (data.status == 'failure') {
@@ -34,7 +36,7 @@ $(document).ready(function() {
 	                    }
 	                    else if (data.status == 'success') {
 	                    	
-	                        window.location.replace('Index.html');
+	                        window.location.replace('Login.html');
 	                        
 	                    }
 	                });
