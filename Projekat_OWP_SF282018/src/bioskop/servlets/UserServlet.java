@@ -45,6 +45,7 @@ public class UserServlet extends HttpServlet {
 	
 		String action = request.getParameter("action");
 		
+		
 		switch (action) {
 			case "update": {
 				try {

@@ -42,7 +42,6 @@ var app = new Vue({
 			$.post('UserServlet', params, function(data){
 				if(data.status == 'success') {
 					this.showEditModal = false;
-					window.location.replace('Welcome.html');
 				}
 				
 				
