@@ -138,6 +138,27 @@ public static List<User> getAllUsers() throws Exception {
 		}
 	}
 	
+	public static boolean logout (User user) throws Exception {
+		ConnectionManager.open();
+		Connection connection = ConnectionManager.getConnection();
+		
+		PreparedStatement pstmt = null;
+		try {
+			String query = "update Users set LoggedIn = 0 where Username = ?";
+			pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, user.getUsername());
+			
+			return pstmt.executeUpdate() == 1;
+			
+		} finally {
+			try { pstmt.close(); } catch (Exception e1) { e1.printStackTrace(); }
+			try { connection.close(); } catch (Exception e1) { e1.printStackTrace(); }
+		}
+	}
+	
+	
+	
+	
 	public static boolean register (User user) throws Exception {
 		ConnectionManager.open();
 		Connection connection = ConnectionManager.getConnection();

@@ -27,32 +27,33 @@ public class LoggedInUserServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String loggedInUsername = (String) request.getSession().getAttribute("loggedInUsername");
-		if (loggedInUsername == null) {
-			request.getRequestDispatcher("./UnauthenticatedServlet").forward(request, response);
-			return;
-		}
+//		if (loggedInUsername == null) {
+//			request.getRequestDispatcher("./UnauthenticatedServlet").forward(request, response);
+//			return;
+//		}
 		try {
 			
-			User user = UserDAO.getUserByUsername(loggedInUsername);
-			if (user == null) {
-				request.getSession().invalidate();
-				request.getRequestDispatcher("./UnauthenticatedServlet").forward(request, response);
-				return;
-			}
+			User loggedUser = UserDAO.getUserByUsername(loggedInUsername);
+//			if (user == null) {
+//				request.getSession().invalidate();
+//				request.getRequestDispatcher("./UnauthenticatedServlet").forward(request, response);
+//				return;
+//			}
 			
-			
-			
+			if(loggedUser != null) {
 			Map<String, Object> data = new LinkedHashMap<String, Object>();
 			Map<String, Object> loggedInUser = new LinkedHashMap<String, Object>();
 			
-			loggedInUser.put("username", user.getUsername());
-			loggedInUser.put("userRole", user.getRole().toString());
+			loggedInUser.put("username", loggedUser.getUsername());
+			loggedInUser.put("userRole", loggedUser.getRole().toString());
 			
 			data.put("loggedInUser", loggedInUser);
+			data.put("loggedUser", loggedUser);
+			
 			
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
-			
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getRequestDispatcher("./FailureServlet").forward(request, response);
