@@ -50,6 +50,7 @@ public class LoginServlet extends HttpServlet {
 			
 			UserDAO.login(user);
 			request.getSession().setAttribute("loggedInUsername", user.getUsername());
+			request.getSession().setAttribute("loggedInUserRole", user.getRole().toString());
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
 			
 			

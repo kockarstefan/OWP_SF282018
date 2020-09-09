@@ -22,16 +22,43 @@ public class MoviesServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String title = request.getParameter("searchTitle");
+		String director = request.getParameter("searchDirector");
+		String genre = request.getParameter("searchGenre");
+		int durationMin = 0;
 		try {
-			List<Movie> movies = new ArrayList<>();
-			movies = MovieDAO.getMovies();
+			String durationMinStr = request.getParameter("durationMin");
+			durationMin = Integer.parseInt(durationMinStr);
+			
+		}catch(Exception e) {}
+		int durationMax = 0;
+		try {
+			String durationMaxStr = request.getParameter("durationMax");
+			durationMax = Integer.parseInt(durationMaxStr);
+		}catch(Exception e) {}
+		int dateMin = 0;
+		try {
+			String dateMinStr = request.getParameter("dateMin");
+			dateMin = Integer.parseInt(dateMinStr);
+		}catch(Exception e) {}
+		int dateMax = 0;
+		try {
+			String dateMaxStr = request.getParameter("dateMax");
+			dateMax = Integer.parseInt(dateMaxStr);
+		}catch(Exception e) {}
+		String distributor = request.getParameter("searchDistributor");
+		String country = request.getParameter("searchCountry");
+
+		try {
+			List<Movie> filteredMovies = MovieDAO.searchMovies(title, director, genre, durationMin, durationMax, dateMin, dateMax, distributor, country);
 			Map<String, Object> data = new LinkedHashMap<String, Object>();
-			data.put("movies", movies);
+			data.put("filteredMovies", filteredMovies);
 			
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			request.getRequestDispatcher("./FailureServlet").forward(request, response);
 		}
 	}
 
