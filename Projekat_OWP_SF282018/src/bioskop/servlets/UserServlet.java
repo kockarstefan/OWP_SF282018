@@ -28,17 +28,23 @@ public class UserServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username = request.getParameter("username");
+		String userRole = request.getParameter("userRole");
+		
 		try {
-			List<User> users = new ArrayList<>();
-			users = UserDAO.getAllUsers();
+			List<User> filteredUsers = UserDAO.searchUsers(username, userRole);
 			Map<String, Object> data = new LinkedHashMap<String, Object>();
-			data.put("users", users);
+			data.put("filteredUsers", filteredUsers);
 			
 			request.setAttribute("data", data);
 			request.getRequestDispatcher("./SuccessServlet").forward(request, response);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			request.getRequestDispatcher("./FailureServlet").forward(request, response);
 		}
+		
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -52,6 +52,60 @@ public static List<User> getAllUsers() throws Exception {
 		return users;
 	}
 
+public static List<User> searchUsers (String username, String userRole) throws Exception {
+	List<User> users = new ArrayList<User>();
+	ConnectionManager.open();
+	Connection connection = ConnectionManager.getConnection();
+	
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	try {
+		StringBuilder query = new StringBuilder();
+		query.append("select * from Users as U where Active = 1 ");
+		if (username != null && !username.equals(""))
+			query.append("and Username like '%' || ? || '%' ");
+		if (userRole != null && !userRole.equals(""))
+			query.append("and Role like '%' || ? || '%' ");
+		
+		query.append("order by Username");
+			
+		String queryStr = query.toString();
+		pstmt = connection.prepareStatement(queryStr);
+		
+		int index = 1;
+		if (username != null && !username.equals(""))
+			pstmt.setString(index++, "%" + username + "%");
+		if (userRole != null && !userRole.equals(""))
+			pstmt.setString(index++, "%" + userRole + "%");
+		
+		
+		rset = pstmt.executeQuery();
+		
+		while (rset.next()) {
+			int index1 = 1;
+			String filteredUsername = rset.getString(index1++);
+			String filteredPassword = rset.getString(index1++);
+			
+			LocalDate filteredRegistrationDate = DateTimeUtil.UnixTimeStampToLocalDate(rset.getInt(index1++));
+			User.Role filteredUserRole = User.Role.valueOf(rset.getString(index1++));
+			boolean active = rset.getInt(index1++) == 1;
+			boolean loggedIn = rset.getInt(index1++) == 1;
+			
+			User user = new User(filteredUsername, filteredPassword ,filteredRegistrationDate , filteredUserRole , active, loggedIn);
+			
+			users.add(user);
+		}
+		
+				
+	} finally {
+		if(pstmt != null) try { pstmt.close(); } catch (Exception e1) { e1.printStackTrace(); }
+		if(rset != null) try { rset.close(); } catch (Exception e1) { e1.printStackTrace(); }
+		if(connection != null) try { connection.close(); } catch (Exception e1) { e1.printStackTrace(); }
+	}
+	
+	return users;
+}
+
 
 	public static User getUserByUsername (String Username) throws Exception {
 		ConnectionManager.open();

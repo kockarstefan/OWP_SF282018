@@ -52,7 +52,33 @@
 	</nav>
 	<div style="height: 120px;" class="row d-none d-lg-block"></div>
 	<!-- END OF NAVIGATION -->
-	<!--  -->
+	
+	<div class="row">
+            <div class="col">
+                <form style="background-color: #22262a !important;
+                color: #FFF !important;
+                padding-top: 10px;
+                padding-left: 10px;
+                padding-right: 10px;">
+                    <div class="form-row">
+                        <div class="form-group col-xl-3">
+                            <input v-model="searchUsername" v-on:keyup="refreshUsers" debounce="500" type="text" class="form-control" id="usernameInput" placeholder="Search by username"/>
+                        </div>
+                        <div class="form-group col-xl-3">
+                            <select v-model="selectedUserRoleSearch" title="Search by role" v-on:change="refreshUsers" id="searchUserRoleInput" class="selectpicker form-control" style="border: 1px #FFF">
+								<option v-for="searchUserRoleOption in searchUserRoleOptions" v-bind:value="searchUserRoleOption.value" style="background: #22262a; color: #FFF;">{{ searchUserRoleOption.text }}</option>
+							</select>
+                        </div>
+                        <div class="form-group col-xl-6">
+                            <select v-model="selectedSort" title="Sort by..." id="sortInput" class="selectpicker form-control" style="border: 1px #FFF">
+                                <option v-for="sortOption in sortOptions" v-bind:value="sortOption" style="background: #22262a; color: #FFF;">{{ sortOption }}</option>
+                              </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+	
 	<div class="container">
 	<div class="table-responsive mt-5">
 		<table class="table table-striped table-bordered">
@@ -67,7 +93,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="user in users">
+				<tr v-for="user in orderedUsers">
 					<th>{{ user.username }}</th>
 					<th>{{ user.registrationDate.dayOfMonth}}-{{user.registrationDate.month}}-{{user.registrationDate.year}}</th>
 					<th>{{ user.role }}</th>
@@ -142,5 +168,19 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+	<script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
+    <script>
+		// Loading `lodash.fp.js` converts `_` to its fp variant.
+		_.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+		// ➜ { 'a': 1, 'b': 2 }
+		
+		// Use `noConflict` to restore the pre-fp variant.
+		var fp = _.noConflict();
+		
+		_.defaults({ 'a': 1 }, { 'a': 2, 'b': 2 });
+		// ➜ { 'a': 1, 'b': 2 }
+		fp.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+		// ➜ { 'a': 1, 'b': 2 }
+		</script>
 	<script src="js/Users.js"></script>
 </html>
