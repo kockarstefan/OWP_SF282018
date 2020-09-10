@@ -5,6 +5,7 @@ var app = new Vue({
 	
 	el: '#app',
 	data: {
+		loggedInUser: { username: '', userRole: ''},
 		movies: [],
 		currentMovie: {},
 		searchTitle: '',
@@ -33,6 +34,17 @@ var app = new Vue({
 		message: ''
 	},
 	methods: {
+			getLoggedInUser: function() {
+				$.get('LoggedInUserServlet', function(data) {
+					console.log(data);
+    	        
+					if (data.status == 'success') {
+						app.loggedInUser.username = data.loggedInUser.username;
+						app.loggedInUser.userRole = data.loggedInUser.userRole;
+						return;
+					}
+				});
+			},
 			getMovies:function(){
 				console.log('title: ' + this.searchTitle);
 			var params = {
@@ -274,7 +286,7 @@ var app = new Vue({
 	    }
 		
 })
-
+app.getLoggedInUser();
 app.getSortOptions();
 app.getMovies();
 

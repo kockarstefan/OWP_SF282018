@@ -32,20 +32,20 @@
 				<a class="nav-link font-weight-bold text-white" href="Welcome.html">Home</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link font-weight-bold text-white" href="Users.html">Users</a>
+				<a v-if="loggedInUser.userRole == 'ADMIN'" class="nav-link font-weight-bold text-white" href="Users.html">Users</a>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown" data-target="#dropdown_target" href="#" style="color: white;">
 				Account</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<a class="dropdown-item" href="Login.html">Sign in</a>
-					<a class="dropdown-item" href="Register.html">Register</a>
-					<a class="dropdown-item" href="'MyAccount.html?username=' + loggedInUser.username">My Account</a>
-					<a class="dropdown-item" href="Logout.html">Logout</a>
+					<a v-if="loggedInUser.userRole == ''" class="dropdown-item" href="Login.html">Sign in</a>
+					<a v-if="loggedInUser.userRole == ''" class="dropdown-item" href="Register.html">Register</a>
+					<a v-if="loggedInUser.userRole != ''" class="dropdown-item" href="'MyAccount.html?username=' + loggedInUser.username">My Account</a>
+					<a v-if="loggedInUser.userRole != ''" class="dropdown-item" href="Logout.html">Logout</a>
 				</div>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link font-weight-bold text-white" href="#">Reports</a>
+				<a v-if="loggedInUser.userRole == 'ADMIN'" class="nav-link font-weight-bold text-white" href="#">Reports</a>
 			</li>
 		</ul>
 		</div>
@@ -103,7 +103,7 @@
 	
 	<div class="container">
 			<div class="col-lg">
-					<button class="btn btn-info float-right" @click="showAddModal=true;">
+					<button v-if="loggedInUser.userRole == 'ADMIN'" class="btn btn-info float-right" @click="showAddModal=true;">
 						<i class="fas fa-film"></i>&nbsp;&nbsp;Add new movie
 					</button>
 			</div>
@@ -119,8 +119,8 @@
 					<th scope="col">Country</th>
 					<th scope="col">ReleaseDate</th>
 					<th scope="col">Details</th>
-					<th scope="col">Edit</th>
-					<th scope="col">Delete</th>
+					<th v-if="loggedInUser.userRole == 'ADMIN'" scope="col">Edit</th>
+					<th v-if="loggedInUser.userRole == 'ADMIN'" scope="col">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -133,8 +133,8 @@
 					<th>{{ movie.country }}</th>
 					<th>{{ movie.releaseDate }}</th>
 					<th><a :href="'ShowMovie.html?id=' + movie.id">Details</a></th>
-					<th><a href="#" class="text-success" @click="showEditModal=true; selectedMovie(movie);"><i class="fas fa-edit"></i></a></th>
-					<th><a href="#" class="text-danger" @click="showDeleteModal=true; selectedMovie(movie);"><i class="fas fa-trash-alt"></i></a></th>
+					<th v-if="loggedInUser.userRole == 'ADMIN'"><a href="#" class="text-success" @click="showEditModal=true; selectedMovie(movie);"><i class="fas fa-edit"></i></a></th>
+					<th v-if="loggedInUser.userRole == 'ADMIN'"><a href="#" class="text-danger" @click="showDeleteModal=true; selectedMovie(movie);"><i class="fas fa-trash-alt"></i></a></th>
 				</tr>
 			</tbody>
 		</table>

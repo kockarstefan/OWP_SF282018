@@ -29,22 +29,20 @@
 				<a class="nav-link font-weight-bold text-white" href="Welcome.html">Home</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link font-weight-bold text-white" href="Users.html">Users</a>
+				<a v-if="loggedInUser.userRole == 'ADMIN'" class="nav-link font-weight-bold text-white" href="Users.html">Users</a>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown" data-target="#dropdown_target" href="#" style="color: white;">
 				Account</a>
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
-					<a class="dropdown-item" href="Login.html">Sign in</a>
-					<a class="dropdown-item" href="Register.html">Register</a>
-					<a class="dropdown-item" :href="'MyAccount.html?username=' + loggedInUser.username">My Account</a>
+					<a v-if="loggedInUser.userRole == ''" class="dropdown-item" href="Login.html">Sign in</a>
+					<a v-if="loggedInUser.userRole == ''" class="dropdown-item" href="Register.html">Register</a>
+					<a v-if="loggedInUser.userRole != ''" class="dropdown-item" :href="'MyAccount.html?username=' + loggedInUser.username">My Account</a>
+					<a v-if="loggedInUser.userRole != ''" class="dropdown-item" href="Logout.html">Logout</a>
 				</div>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link font-weight-bold text-white" href="#">Reports</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link font-weight-bold text-white" href="Logout.html">Logout</a>
+				<a v-if="loggedInUser.userRole == 'ADMIN'" class="nav-link font-weight-bold text-white" href="#">Reports</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link font-weight-bold text-white" href="Movies.html">Movies</a>
