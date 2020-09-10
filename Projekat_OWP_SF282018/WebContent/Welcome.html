@@ -37,7 +37,7 @@
 				<div class="dropdown-menu" aria-labelledby="dropdown_target">
 					<a class="dropdown-item" href="Login.html">Sign in</a>
 					<a class="dropdown-item" href="Register.html">Register</a>
-					<a class="dropdown-item" href="#">My Account</a>
+					<a class="dropdown-item" :href="'MyAccount.html?username=' + loggedInUser.username">My Account</a>
 				</div>
 			</li>
 			<li class="nav-item">
