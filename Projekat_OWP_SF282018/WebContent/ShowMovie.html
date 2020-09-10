@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="showMovie.css">
+<title>Movie</title>
+</head>
+<body style="	background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),url(imgs/cinema_cover.jpg);
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-size: cover;">
+<div id="app">
+ 	<!-- NAVIGATION -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapse_target">
+		<a class="navbar-brand" href="Welcome.html"><img src="imgs/cinema-logo.jpg" class="img-responsive"></a>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a class="nav-link font-weight-bold text-white" href="Welcome.html">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link font-weight-bold text-white" href="Users.html">Users</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle font-weight-bold" data-toggle="dropdown" data-target="#dropdown_target" href="#" style="color: white;">
+				Account</a>
+				<div class="dropdown-menu" aria-labelledby="dropdown_target">
+					<a class="dropdown-item" href="Index.html">Sign in</a>
+					<a class="dropdown-item" href="Register.html">Register</a>
+					<a class="dropdown-item" href="#">My Account</a>
+					<a class="dropdown-item" href="#">Logout</a>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link font-weight-bold text-white" href="#">Reports</a>
+			</li>
+		</ul>
+		</div>
+	</nav>
+	<div style="height: 120px;" class="row d-none d-lg-block"></div>
+	<!-- END OF NAVIGATION -->
+
+	<div class="card ml-auto mr-auto card-scrollable" style="width: 18rem;">
+  		<img src="imgs/movie-logo.jpg" class="card-img-top img-responsive" alt="...">
+  		<div class="card-body">
+    		<h5 class="card-title"> {{ movie.title }}</h5>
+    		<ul class="list-group list-group-flush">
+    			 <li class="list-group-item"><p class="card-text"><b>Director: </b>{{ movie.director }}</p></li>
+    			 <li class="list-group-item"><p class="card-text"><b>Genre: </b>{{ movie.genre }}</p></li>
+    			 <li class="list-group-item"><p class="card-text"><b>Duration: </b>{{ movie.duration }}</p></li>
+    			 <li class="list-group-item"><p class="card-text"><b>Distributor: </b>{{ movie.distributor }}</p></li>
+    			 <li class="list-group-item"><p class="card-text"><b>Country: </b>{{ movie.country }}</p></li>
+    			 <li class="list-group-item"><p class="card-text"><b>Release date: </b>{{ movie.releaseDate }}</p></li>
+ 			</ul>
+  		</div>
+	</div>
+</div>
+</body>
+	<script src="js/jquery-3.4.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+	<script src="js/ShowMovie.js"></script>
+</html>

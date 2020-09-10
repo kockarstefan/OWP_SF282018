@@ -1,0 +1,14 @@
+.navbar-brand .img-responsive {
+	height: auto;
+	width: auto;
+	max-height: 72px;
+	max-width: 250px;
+}
+
+.navbar-nav .nav-link a {
+	color: white;
+}
+
+.img-responsive {
+	height: 150px;
+}

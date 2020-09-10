@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-var id = window.location.search.slice(1)
-console.log(id);
 	
 var app = new Vue({
 	

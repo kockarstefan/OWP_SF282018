@@ -41,7 +41,7 @@
 					<a class="dropdown-item" href="Index.html">Sign in</a>
 					<a class="dropdown-item" href="Register.html">Register</a>
 					<a class="dropdown-item" href="#">My Account</a>
-					<a class="dropdown-item" href="#">Logout</a>
+					<a class="dropdown-item" href="Logout.html">Logout</a>
 				</div>
 			</li>
 			<li class="nav-item">
@@ -118,6 +118,7 @@
 					<th scope="col">Distributor</th>
 					<th scope="col">Country</th>
 					<th scope="col">ReleaseDate</th>
+					<th scope="col">Details</th>
 					<th scope="col">Edit</th>
 					<th scope="col">Delete</th>
 				</tr>
@@ -131,6 +132,7 @@
 					<th>{{ movie.distributor }}</th>
 					<th>{{ movie.country }}</th>
 					<th>{{ movie.releaseDate }}</th>
+					<th><a :href="'ShowMovie.html?id=' + movie.id">Details</a></th>
 					<th><a href="#" class="text-success" @click="showEditModal=true; selectedMovie(movie);"><i class="fas fa-edit"></i></a></th>
 					<th><a href="#" class="text-danger" @click="showDeleteModal=true; selectedMovie(movie);"><i class="fas fa-trash-alt"></i></a></th>
 				</tr>
